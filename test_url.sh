@@ -10,9 +10,13 @@ do
   code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\n" "$url" -o /dev/null`
 
   if [ "$code" = "200" ]; then
-    echo $code
+    echo "Success"
     break
   else
     sleep $timeout
-  fi
+  fi  
 done
+
+if [ "$code" != "200" ]; then
+  echo "Failure"
+fi
